@@ -1,0 +1,62 @@
+---
+title: "ecoli"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, error = FALSE, warning = FALSE)
+```
+
+
+```{r}
+dir.create("script")
+dir.create("data")
+```
+
+
+
+```{r}
+source("script/load_ecoli.R")
+head(metadata)
+
+library(ggplot2)
+
+ggplot(metadata, aes(x=sample, y=genome_size, color=generation, shape = cit)) +
+  geom_point() +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1))+
+labs(x="Sample",
+     y="Genome Size")
+
+ggplot(metadata, aes(x=sample, y=genome_size, color=generation, shape = cit)) +
+  geom_point() +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1, size = 5))+
+labs(x="Sample",
+     y="Genome Size")+
+  facet_wrap(~clade)
+```
+```{r}
+ggplot(metadata, aes(x=cit, y=genome_size, fill=cit))+ 
+  scale_fill_manual(values = c("orange", "purple","green"))+
+  geom_boxplot()
+
+ggplot(metadata, aes(x=cit, y=genome_size, fill=cit))+ 
+  scale_fill_manual(values = c("orange", "purple","green"))+
+  geom_boxplot()+ 
+  facet_wrap(~clade)
+```
+
+
+```{r}
+ggplot(metadata, aes(x=genome_size))+
+  geom_histogram()
+
+ggplot(metadata, aes(x=genome_size, fill=clade))+
+  geom_histogram() +
+  facet_wrap(~clade)
+```
+
+```{r}
+ggplot(metadata) +
+  geom_histogram(aes(x=genome_size), stat="bin", binwidth = 0,5)
+```
+
