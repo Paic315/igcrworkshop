@@ -14,7 +14,7 @@ ggplot(metadata, aes(x=sample, y=genome_size, color=clade)) +
 ggplot(metadata, aes(x=cit, y=genome_size, fill=cit))+ 
   scale_fill_manual(values = c("orange", "purple","green"))+
   theme(panel.grid.major=element_line(size=0.5, color="grey"))+
-  geom_boxplot()+
+  geom_boxplot(alpha=0.1)+
   labs(x="citrate mutant type", y="Genome Size")
 
 
